@@ -39,6 +39,7 @@ type Props = {
   delayLongPress: number;
   swipeToCloseEnabled?: boolean;
   doubleTapToZoomEnabled?: boolean;
+  enableZoom?: boolean;
 };
 
 const ImageItem = ({
@@ -49,6 +50,7 @@ const ImageItem = ({
   delayLongPress,
   swipeToCloseEnabled = true,
   doubleTapToZoomEnabled = true,
+  enableZoom = false,
 }: Props) => {
   const imageContainer = useRef<ScrollView & NativeMethodsMixin>(null);
   const imageDimensions = useImageDimensions(imageSrc);
@@ -131,12 +133,19 @@ const ImageItem = ({
         onScrollEndDrag,
       })}
     >
-      <Animated.Image
-        {...panHandlers}
-        source={imageSrc}
-        style={imageStylesWithOpacity}
-        onLoad={onLoaded}
-      />
+      {enableZoom?
+        <Animated.Image
+          {...panHandlers}
+          source={imageSrc}
+          style={imageStylesWithOpacity}
+          onLoad={onLoaded}
+        /> : 
+        <Animated.Image
+          source={imageSrc}
+          style={imageStylesWithOpacity}
+          onLoad={onLoaded}
+        />
+      }
       {(!isLoaded || !imageDimensions) && <ImageLoading />}
     </ScrollView>
   );
