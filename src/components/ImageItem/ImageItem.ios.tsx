@@ -41,6 +41,7 @@ type Props = {
   delayLongPress: number;
   swipeToCloseEnabled?: boolean;
   doubleTapToZoomEnabled?: boolean;
+  enableZoom?: boolean;
 };
 
 const ImageItem = ({
@@ -51,6 +52,7 @@ const ImageItem = ({
   delayLongPress,
   swipeToCloseEnabled = true,
   doubleTapToZoomEnabled = true,
+  enableZoom = false,
 }: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const [loaded, setLoaded] = useState(false);
@@ -118,7 +120,7 @@ const ImageItem = ({
       <ScrollView
         ref={scrollViewRef}
         style={styles.listItem}
-        pinchGestureEnabled
+        pinchGestureEnabled={enableZoom}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         maximumZoomScale={maxScale}
