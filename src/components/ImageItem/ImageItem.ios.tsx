@@ -51,7 +51,7 @@ const ImageItem = ({
   onLongPress,
   delayLongPress,
   swipeToCloseEnabled = true,
-  doubleTapToZoomEnabled = true,
+  doubleTapToZoomEnabled = false,
   enableZoom = false,
 }: Props) => {
   const scrollViewRef = useRef<ScrollView>(null);
